@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Products;
+use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,23 +41,24 @@ class catalogController extends AbstractController
         ],
     ];
     /**
-     * @Route("/catalog/{slug}")
+     * @Route("/category/{slug}")
      */
-    public function show(Request $request, $slug = false, EntityManagerInterface $entity)
+    public function show(Request $request, $slug, EntityManagerInterface $em)
     {
-        $repository = $entity->getRepository(Products::class);
-        $product = $repository->findOneBy(['slug' => $slug]);
 
-        if(! $product){
-            throw $this->createNotFoundException(sprintf('Статья %s не найдена'), $slug);
+        $repository = $em->getRepository(Category::class);
+        $category = $repository->findOneBy(['slug' => $slug]);
+
+        if( ! $category){
+            throw $this->createNotFoundException(sprintf('Категория %s не найдена'), $slug);
         }
-        //dd($product);
+        //dd($category);
 
         $query = $request->query->get('query');
         //dd($query);
 
-        return $this->render('catalog/show.html.twig', [
-            'article' => $product,
+        return $this->render('/category/show.html.twig', [
+            'category' => $category,
             'items' => $this->items,
         ]);
     }
