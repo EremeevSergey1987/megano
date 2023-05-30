@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SaleController extends AbstractController
+class SaleController extends pagesController
 {
     #[Route('/sale', name: 'app_sale')]
 
-    public function index(): Response
+    public function index(CategoryRepository $repository): Response
     {
         $sale_item = [
             [
@@ -51,6 +52,8 @@ class SaleController extends AbstractController
         return $this->render('sale/index.html.twig', [
             'controller_name' => 'SaleController',
             'sale_item' => $sale_item,
+            'category' => ['name' => 'Скидки'],
+            'categorys' => $this->getCategory($repository),
         ]);
     }
 }

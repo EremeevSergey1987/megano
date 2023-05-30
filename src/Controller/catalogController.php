@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class catalogController extends AbstractController
+class catalogController extends pagesController
 {
     public $items = [
         [
@@ -52,14 +52,13 @@ class catalogController extends AbstractController
         if( ! $category){
             throw $this->createNotFoundException(sprintf('Категория %s не найдена'), $slug);
         }
-        //dd($category);
 
         $query = $request->query->get('query');
-        //dd($query);
 
         return $this->render('/category/show.html.twig', [
             'category' => $category,
             'items' => $this->items,
+            'categorys' => $this->getCategory($em),
         ]);
     }
 }

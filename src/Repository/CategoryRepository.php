@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,20 +40,56 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
+    /**
+     * @return Category[] Returns an array of Category objects
+     */
+    public function findLatestPublished(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        return $this->published($this->latest($queryBuilder))
 //            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
 //            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Category[] Returns an array of Category objects
+     */
+    public function findLatest(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        return $this->latest($queryBuilder)
+            ->orderBy('c.publishedAt', "DESC")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Category[] Returns an array of Category objects
+     */
+    public function findPublished(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        return $this->published($queryBuilder)
+            ->andWhere('c.publishedAt IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    private function published(QueryBuilder $queryBuilder)
+    {
+        return $queryBuilder->andWhere('c.publishedAt IS NOT NULL');
+    }
+    private function  latest(QueryBuilder $queryBuilder)
+    {
+        return $queryBuilder->orderBy('c.publishedAt', "DESC");
+
+    }
 
 //    public function findOneBySomeField($value): ?Category
 //    {
