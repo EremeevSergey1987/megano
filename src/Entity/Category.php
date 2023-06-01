@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -16,6 +17,9 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     */
     #[ORM\Column(length: 200, unique: true)]
     private ?string $slug = null;
 
@@ -27,6 +31,18 @@ class Category
 
     #[ORM\Column(nullable: true)]
     private ?int $parentID = null;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     */
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     */
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -89,6 +105,30 @@ class Category
     public function setParentID(?int $parentID): self
     {
         $this->parentID = $parentID;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
