@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\Products;
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,22 +44,22 @@ class catalogController extends pagesController
     /**
      * @Route("/category/{slug}")
      */
-    public function show(Request $request, $slug, EntityManagerInterface $em)
+    public function show(Request $request, $slug, EntityManagerInterface $em, CategoryRepository $repository)
     {
-
-        $repository = $em->getRepository(Category::class);
-        $category = $repository->findOneBy(['slug' => $slug]);
+        $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);
 
         if( ! $category){
             throw $this->createNotFoundException(sprintf('Категория %s не найдена'), $slug);
         }
 
         $query = $request->query->get('query');
+        dump($this->getCategory($repository));
+
 
         return $this->render('/category/show.html.twig', [
             'category' => $category,
             'items' => $this->items,
-            'categorys' => $this->getCategory($em),
+            'categorys' => $this->getCategory($repository),
         ]);
     }
 }

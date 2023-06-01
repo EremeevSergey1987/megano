@@ -25,6 +25,9 @@ class Category
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $parentID = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Category
     public function setPublishedAt(?\DateTimeImmutable $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getParentID(): ?int
+    {
+        return $this->parentID;
+    }
+
+    public function setParentID(?int $parentID): self
+    {
+        $this->parentID = $parentID;
 
         return $this;
     }

@@ -121,14 +121,15 @@ p.error-browser
                     <div class="CategoriesButton-content">
 
 {% for category in categorys %}
-                        <div class="CategoriesButton-link"><a href="/category/{{ category.slug }}">
-                                <div class="CategoriesButton-icon"><img src="{{ asset('assets/img/icons/departments/2.svg') }}" alt="2.svg"/>
-                                </div><span class="CategoriesButton-text">{{ category.name }}</span></a>
-                        </div>
+    <div class="CategoriesButton-link"><a href="/category/{{ category.slug }}">
+            <div class="CategoriesButton-icon"><img src="{{ asset('assets/img/icons/departments/2.svg') }}" alt="2.svg"/>
+            </div><span class="CategoriesButton-text">{{ category.name }} </span></a>
+    </div>
 {% endfor %}
                         <div class="CategoriesButton-link"><a href="#">
-                                <div class="CategoriesButton-icon"><img src="{{ asset('assets/img/icons/departments/3.svg') }}" alt="3.svg"/>
-                            </div><span class="CategoriesButton-text">Cameras</span></a><a class="CategoriesButton-arrow" href="#"></a>
+                                <div class="CategoriesButton-icon">
+                                    <img src="{{ asset('assets/img/icons/departments/3.svg') }}" alt="3.svg"/>
+                                </div><span class="CategoriesButton-text">Категория</span></a><a class="CategoriesButton-arrow" href="#"></a>
                             <div class="CategoriesButton-submenu"><a class="CategoriesButton-link" href="#">
                                     <div class="CategoriesButton-icon"><img src="{{ asset('assets/img/icons/departments/1.svg') }}" alt="1.svg"/>
                                     </div><span class="CategoriesButton-text">Accessories</span></a><a class="CategoriesButton-link" href="#">
@@ -136,6 +137,7 @@ p.error-browser
                                     </div><span class="CategoriesButton-text">Bags</span></a>
                             </div>
                         </div>
+
 
 
                     </div>
@@ -156,6 +158,7 @@ p.error-browser
     </div>
 
 {% block body %}
+
 {% endblock %}
 
 <footer class="Footer">
