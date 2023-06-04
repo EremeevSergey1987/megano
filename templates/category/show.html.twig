@@ -64,16 +64,16 @@
                         </div>
                     </div>
                     <div class="Cards">
-
-                        {% for item in items %}
-                            <div class="Card"><a class="Card-picture" href="#"><img src="{{ item.img }}" alt="card.jpg"></a>
+                       {% for item in category.products %}
+                            <div class="Card">
+                                <a class="Card-picture" href="#"><img src="{{ item.img }}" alt="card.jpg"></a>
                                 <div class="Card-content">
-                                    <strong class="Card-title"><a href="product.html">{{ item.desc }}</a>
+                                    <strong class="Card-title"><a href="{{ item.slug }}">{{ item.name }}</a>
                                     </strong>
                                     <div class="Card-description">
-                                        <div class="Card-cost"><span class="Card-priceOld">${{ item.price }}</span><span class="Card-price">${{ item.price_sale }}</span>
+                                        <div class="Card-cost"><span class="Card-priceOld">$100</span><span class="Card-price">$200</span>
                                         </div>
-                                        <div class="Card-category">{{ item.category }}</div>
+                                        <div class="Card-category">{{ item.description }}</div>
                                         <div class="Card-hover"><a class="Card-btn" href="#"><img src="assets/img/icons/card/bookmark.svg" alt="bookmark.svg"></a><a class="Card-btn" href="#"><img src="assets/img/icons/card/cart.svg" alt="cart.svg"></a><a class="Card-btn" href="#"><img src="assets/img/icons/card/change.svg" alt="change.svg"></a>
                                         </div>
                                     </div>
