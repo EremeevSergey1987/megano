@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
+    public function getCategory(CategoryRepository $repository)
+    {
+        $categorys = $repository->findLatestPublished();
+        return $categorys;
+    }
     public $items = [
         [
             'category' => 'Category name',
@@ -39,10 +45,12 @@ class CartController extends AbstractController
         ],
     ];
     #[Route('/cart', name: 'app_cart')]
-    public function index(): Response
+    public function index(CategoryRepository $repository): Response
     {
         return $this->render('cart/index.html.twig', [
             'items' => $this->items,
+            'category' => ['name' => 'Корзина'],
+            'categorys' => $this->getCategory($repository),
         ]);
     }
 }
