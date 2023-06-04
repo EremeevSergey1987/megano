@@ -46,7 +46,6 @@ class CategoryRepository extends ServiceEntityRepository
     public function findLatestPublished(): array
     {
         $queryBuilder = $this->createQueryBuilder('c');
-
         return $this->published($this->latest($queryBuilder))
 //            ->setParameter('val', $value)
 //            ->setMaxResults(10)

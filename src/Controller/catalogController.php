@@ -53,7 +53,7 @@ class catalogController extends pagesController
         }
 
         $query = $request->query->get('query');
-        dump($this->getCategory($repository));
+        //dump($this->getCategory($repository));
 
 
         return $this->render('/category/show.html.twig', [
