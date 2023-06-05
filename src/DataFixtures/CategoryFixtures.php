@@ -22,32 +22,17 @@ class CategoryFixtures extends BaseFixtures
                     ->setCategory($category);
 
             }
-            $products = (new Products())
-                ->setName($this->faker->words(2, true))
-                ->setCategory($category)
-                ->setSlug($this->faker->words(2, true))
-                ->setImg('img.jpg')
-                ->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
-                ->setDescription($this->faker->words(2, true));
-            $manager->persist($products);
 
-            $products = (new Products())
-                ->setName($this->faker->words(2, true))
-                ->setCategory($category)
-                ->setSlug($this->faker->words(2, true))
-                ->setImg('img.jpg')
-                ->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
-                ->setDescription($this->faker->words(2, true));
-            $manager->persist($products);
-
-            $products = (new Products())
-                ->setName($this->faker->words(2, true))
-                ->setCategory($category)
-                ->setSlug($this->faker->words(2, true))
-                ->setImg('img.jpg')
-                ->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
-                ->setDescription($this->faker->words(2, true));
-            $manager->persist($products);
+            for($i = 1; $i < 29; $i++){
+                $products = (new Products())
+                    ->setName($this->faker->words(2, true))
+                    ->setCategory($category)
+                    ->setImg($this->faker->imageUrl(210, 210, 'Notebook', true))
+                    ->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
+                    ->setDescription($this->faker->words(2, true))
+                    ->setPrice($this->faker->numberBetween(300, 9000));
+                $manager->persist($products);
+            }
 
         });
     }

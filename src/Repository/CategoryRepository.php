@@ -49,6 +49,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->published($this->latest($queryBuilder))
 //            ->setParameter('val', $value)
 //            ->setMaxResults(10)
+
             ->getQuery()
             ->getResult()
         ;

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
 class Products
@@ -18,6 +19,9 @@ class Products
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     */
     #[ORM\Column(length: 200, unique: true)]
     private ?string $slug = null;
 
@@ -33,6 +37,9 @@ class Products
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column]
+    private ?int $price = null;
 
     public function getId(): ?int
     {
@@ -107,6 +114,18 @@ class Products
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

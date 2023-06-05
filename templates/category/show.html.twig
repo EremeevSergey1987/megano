@@ -1,6 +1,6 @@
 {% extends 'base_content.html.twig' %}
 
-{% block title %}Категория{% endblock %}
+{% block title %}Категория {{ category.name }}{% endblock %}
 
     {% block content %}
 
@@ -66,15 +66,21 @@
                     <div class="Cards">
                        {% for item in category.products %}
                             <div class="Card">
-                                <a class="Card-picture" href="#"><img src="{{ item.img }}" alt="card.jpg"></a>
+                                <a class="Card-picture" href="{{ category.slug }}/{{ item.slug }}"><img src="{{ item.img }}" alt="card.jpg"></a>
                                 <div class="Card-content">
                                     <strong class="Card-title"><a href="{{ item.slug }}">{{ item.name }}</a>
                                     </strong>
                                     <div class="Card-description">
-                                        <div class="Card-cost"><span class="Card-priceOld">$100</span><span class="Card-price">$200</span>
+                                        <div class="Card-cost"><span class="Card-priceOld">${{ item.price/2 }}</span><span class="Card-price">${{ item.price }}</span>
                                         </div>
                                         <div class="Card-category">{{ item.description }}</div>
-                                        <div class="Card-hover"><a class="Card-btn" href="#"><img src="assets/img/icons/card/bookmark.svg" alt="bookmark.svg"></a><a class="Card-btn" href="#"><img src="assets/img/icons/card/cart.svg" alt="cart.svg"></a><a class="Card-btn" href="#"><img src="assets/img/icons/card/change.svg" alt="change.svg"></a>
+                                        <div class="Card-hover">
+                                            <a class="Card-btn" href="{{ category.slug }}/{{ item.slug }}">
+                                                <img src="{{ asset('/assets/img/icons/card/bookmark.svg') }}" alt="bookmark.svg"></a>
+                                            <a class="Card-btn" href="#">
+                                                <img src="{{ asset('/assets/img/icons/card/cart.svg') }}" alt="cart.svg"></a>
+                                            <a class="Card-btn" href="#">
+                                                <img src="{{ asset('/assets/img/icons/card/change.svg') }}" alt="change.svg"></a>
                                         </div>
                                     </div>
                                 </div>
