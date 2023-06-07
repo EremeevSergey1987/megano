@@ -16,6 +16,7 @@ class catalogController extends pagesController
      */
     public function show(Request $request, $slug, EntityManagerInterface $em, CategoryRepository $repository)
     {
+
         $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);
         return $this->render('/category/show.html.twig', [
             'category' => $category,

@@ -15,8 +15,10 @@ class CategoryFixtures extends BaseFixtures
         {
             $category
                 ->setName($this->faker->words(2, true))
-                ->setText($this->faker->paragraphs(1, true))
-                ->setNo('123');
+                ->setText($this->faker->words(2, true))
+                ->setNo('123')
+                ->setParentID('2');
+
             if ($this->faker->boolean(60)) {
                 $category->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
                     ->setCategory($category);
