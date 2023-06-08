@@ -52,23 +52,11 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Products::class)]
     private Collection $products;
 
-    #[ORM\Column]
-    private ?int $parent_id = null;
-
-    #[ORM\ManyToOne(targetEntity: self::class)]
-    private ?self $childre_id = null;
-
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childre')]
-    private ?self $parent = null;
-
-    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
-    private Collection $childre;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->products = new ArrayCollection();
-        $this->childre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,17 +112,6 @@ class Category
         return $this;
     }
 
-    public function getParentID(): ?int
-    {
-        return $this->parentID;
-    }
-
-    public function setParentID(?int $parentID): self
-    {
-        $this->parentID = $parentID;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -202,18 +179,6 @@ class Category
         return $this;
     }
 
-    public function getNo(): ?string
-    {
-        return $this->no;
-    }
-
-    public function setNo(string $no): self
-    {
-        $this->no = $no;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Products>
      */
@@ -238,60 +203,6 @@ class Category
             // set the owning side to null (unless already changed)
             if ($product->getCategory() === $this) {
                 $product->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getChildreId(): ?self
-    {
-        return $this->childre_id;
-    }
-
-    public function setChildreId(?self $childre_id): self
-    {
-        $this->childre_id = $childre_id;
-
-        return $this;
-    }
-
-    public function getParent(): ?self
-    {
-        return $this->parent;
-    }
-
-    public function setParent(?self $parent): self
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, self>
-     */
-    public function getChildre(): Collection
-    {
-        return $this->childre;
-    }
-
-    public function addChildre(self $childre): self
-    {
-        if (!$this->childre->contains($childre)) {
-            $this->childre->add($childre);
-            $childre->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChildre(self $childre): self
-    {
-        if ($this->childre->removeElement($childre)) {
-            // set the owning side to null (unless already changed)
-            if ($childre->getParent() === $this) {
-                $childre->setParent(null);
             }
         }
 

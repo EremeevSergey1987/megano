@@ -13,8 +13,6 @@ class pagesController extends AbstractController
     public function getCategory(CategoryRepository $repository)
     {
         $categorys = $repository->findLatestPublished();
-        dd($categorys);
-        
         return $categorys;
     }
     /**
@@ -49,9 +47,25 @@ class pagesController extends AbstractController
             return $this->render('pages/compare.html.twig', [
                 'category' => ['name' => 'СРАВНЕНИЕ ТОВАРОВ'],
                 'categorys' => $this->getCategory($repository),
-
             ]);
         }
+        if($slug == 'login') {
+            return $this->render('pages/login.html.twig', [
+                'category' => ['name' => 'Авторизация'],
+                'categorys' => $this->getCategory($repository),
+            ]);
+        }
+        if($slug == 'register') {
+            return $this->render('pages/register.html.twig', [
+                'category' => ['name' => 'Авторизация'],
+                'categorys' => $this->getCategory($repository),
+            ]);
+        }
+
+
+
+
+
         if($slug == 'catalog') {
             $items = [
                 [

@@ -73,7 +73,7 @@ p.error-browser
                 </div>
                 <nav class="row-block">
                     <div class="row ControlPanel-rowSplit">
-                        <div class="row-block"><a class="ControlPanel-title" href="login.html">Войти</a>&nbsp;/&nbsp;<a class="ControlPanel-title" href="register.html">Регистрация</a>
+                        <div class="row-block"><a class="ControlPanel-title" href="/login/">Войти</a>&nbsp;/&nbsp;<a class="ControlPanel-title" href="/register/">Регистрация</a>
                         </div>
                     </div>
                 </nav>
@@ -96,7 +96,7 @@ p.error-browser
                 </div>
             </nav>
             <div class="row-block">
-                <div class="CartBlock"><a class="CartBlock-block" href="compare"><img src="{{ asset('assets/img/icons/exchange.svg') }}" class="CartBlock-img" alt="exchange.svg"/><span class="CartBlock-amount">4</span></a>
+                <div class="CartBlock"><a class="CartBlock-block" href="/compare/"><img src="{{ asset('assets/img/icons/exchange.svg') }}" class="CartBlock-img" alt="exchange.svg"/><span class="CartBlock-amount">4</span></a>
                     <a class="CartBlock-block" href="{{ path('app_cart') }}">
                         <img src="{{ asset('assets/img/icons/cart.svg') }}" class="CartBlock-img" alt="cart.svg"/><span class="CartBlock-amount">0</span></a>
                     <div class="CartBlock-block"><span class="CartBlock-price">0.00$</span>
@@ -121,14 +121,13 @@ p.error-browser
                     <div class="CategoriesButton-content">
 
 {% for category in categorys %}
-
 {% if (category.category) %}
     <div class="CategoriesButton-link"><a href="#">
             <div class="CategoriesButton-icon">
                 <img src="{{ asset('assets/img/icons/departments/3.svg') }}" alt="3.svg"/>
             </div><span class="CategoriesButton-text">{{ category.name }}</span></a><a class="CategoriesButton-arrow" href="#"></a>
         <div class="CategoriesButton-submenu">
-            <a class="CategoriesButton-link" href="#">
+            <a class="CategoriesButton-link" href="/category/{{ category.category.slug }}">
                 <div class="CategoriesButton-icon">
                     <img src="{{ asset('assets/img/icons/departments/1.svg') }}" alt="1.svg"/>
                 </div>
@@ -170,10 +169,6 @@ p.error-browser
         </div>
     </div>
 
-    {{ dump(categorys) }}
-{% for category in categorys %}
-        {{ dump(category.category) }}
-{% endfor %}
 
 {% block body %}
 
