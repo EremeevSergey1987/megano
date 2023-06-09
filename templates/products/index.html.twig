@@ -2,7 +2,22 @@
 
 {% block title %}Hello ProductsController!{% endblock %}
 
-{% block content %}
+{% block body %}
+
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+                <h1 class="Middle-title">{{ category.name }}</h1>
+                <ul class="breadcrumbs Middle-breadcrumbs">
+                    <li class="breadcrumbs-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumbs-item"><a href="/catalog/">Каталог</a></li>
+                    <li class="breadcrumbs-item"><a href="/catalog/">{{ category.category.slug }}</a></li>
+                    <li class="breadcrumbs-item breadcrumbs-item_current"><span>{{ category.name }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <div class="Section">
         <div class="wrap">
@@ -33,7 +48,7 @@
                                     <div class="ProductCard-price">{{ category.price }}</div>
                                     <div class="ProductCard-priceOld">{{ category.price * 2 }}</div>
                                 </div>
-                                <div class="ProductCard-compare"><a class="btn btn_default" href="#"><img class="btn-icon" src="assets/img/icons/card/change.svg" alt="change.svg"></a></div>
+                                <div class="ProductCard-compare"><a class="btn btn_default" href="#"><img class="btn-icon" src="/assets/img/icons/card/change.svg" alt="change.svg"></a></div>
                             </div>
                         </div>
                         <div class="ProductCard-text">
@@ -51,7 +66,7 @@
                                     <button class="Amount-add" type="button"></button>
                                 </div>
                             </div>
-                            <div class="ProductCard-cartElement"><a class="btn btn_primary" href="#"><img class="btn-icon" src="assets/img/icons/card/cart_white.svg" alt="cart_white.svg"><span class="btn-content">Купить</span></a>
+                            <div class="ProductCard-cartElement"><a class="btn btn_primary" href="#"><img class="btn-icon" src="/assets/img/icons/card/cart_white.svg" alt="cart_white.svg"><span class="btn-content">Купить</span></a>
                             </div>
                         </div>
                     </div>

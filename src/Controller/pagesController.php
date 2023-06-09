@@ -13,6 +13,7 @@ class pagesController extends AbstractController
     public function getCategory(CategoryRepository $repository)
     {
         $categorys = $repository->findLatestPublished();
+
         return $categorys;
     }
     /**
