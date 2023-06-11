@@ -13,9 +13,9 @@ class pagesController extends AbstractController
     public function getCategory(CategoryRepository $repository)
     {
         $categorys = $repository->findLatestPublished();
-
         return $categorys;
     }
+
     /**
      * @Route("/", name="app_homepage")
      */
@@ -47,12 +47,6 @@ class pagesController extends AbstractController
         if($slug == 'compare') {
             return $this->render('pages/compare.html.twig', [
                 'category' => ['name' => 'СРАВНЕНИЕ ТОВАРОВ'],
-                'categorys' => $this->getCategory($repository),
-            ]);
-        }
-        if($slug == 'login') {
-            return $this->render('pages/login.html.twig', [
-                'category' => ['name' => 'Авторизация'],
                 'categorys' => $this->getCategory($repository),
             ]);
         }
