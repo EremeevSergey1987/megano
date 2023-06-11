@@ -12,29 +12,27 @@
 {% if pageCount > 1 %}
 <div class="Pagination">
     <div class="Pagination-ins">
-        {% set classAlign = (align is not defined) ? '' : align=='center' ? ' justify-content-center' : (align=='right' ? ' justify-content-end' : '') %}
-        {% set classSize = (size is not defined) ? '' : size=='large' ? ' pagination-lg' : (size=='small' ? ' pagination-sm' : '') %}
+
 
             {% if previous is defined %}
-
                     <a class="Pagination-element Pagination-element_prev" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
                         <img src="/assets/img/icons/prevPagination.svg" alt="prevPagination.svg">
                     </a>
-
-
             {% else %}
-
-                    <span class="page-link">&laquo;&nbsp;{{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}</span>
-
+                    <a class="Pagination-element Pagination-element_prev" rel="prev" href="#">
+                        <img src="/assets/img/icons/prevPagination.svg" alt="prevPagination.svg">
+                    </a>
             {% endif %}
 
             {% if startPage > 1 %}
 
                     <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
 
+
                 {% if startPage == 3 %}
 
                         <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
+
 
                 {% elseif startPage != 2 %}
 
@@ -46,12 +44,12 @@
             {% for page in pagesInRange %}
                 {% if page != current %}
 
-                        <a class="page-link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                    <a class="Pagination-element" href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+                        <span class="Pagination-text">{{ page }}</span>
+                    </a>
 
                 {% else %}
-
-                        <span class="page-link">{{ page }}</span>
-
+                    <a class="Pagination-element Pagination-element_current" href="#"><span class="Pagination-text">{{ page }}</span></a>
                 {% endif %}
 
             {% endfor %}
@@ -71,38 +69,18 @@
                     </a>
             {% endif %}
 
+
             {% if next is defined %}
-
-                    <a class="Pagination-element" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
-                        {{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;
-                        &raquo;</a>
-
+                    <a class="Pagination-element Pagination-element_prev" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                        <img src="/assets/img/icons/nextPagination.svg" alt="nextPagination.svg">
+                    </a>
             {% else %}
-
-                    <span class="page-link">{{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;&raquo;</span>
-
+                <a class="Pagination-element Pagination-element_prev" href="#">
+                    <img src="/assets/img/icons/nextPagination.svg" alt="nextPagination.svg">
+                </a>
             {% endif %}
 
 
     </div>
 </div>
 {% endif %}
-
-
-<div class="Pagination">
-    <div class="Pagination-ins">
-
-        <a class="Pagination-element Pagination-element_prev" href="#">
-            <img src="/assets/img/icons/prevPagination.svg" alt="prevPagination.svg">
-        </a>
-
-        <a class="Pagination-element Pagination-element_current" href="#"><span class="Pagination-text">1</span></a>
-        <a class="Pagination-element" href="#"><span class="Pagination-text">2</span></a>
-        <a class="Pagination-element" href="#"><span class="Pagination-text">3</span></a>
-
-        <a class="Pagination-element Pagination-element_prev" href="#">
-            <img src="/assets/img/icons/nextPagination.svg" alt="nextPagination.svg">
-        </a>
-
-    </div>
-</div>

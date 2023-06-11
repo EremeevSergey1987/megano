@@ -21,7 +21,7 @@ class CategoryFixtures extends BaseFixtures
                     ->setCategory($category);
             }
 
-            for($i = 1; $i < 29; $i++){
+            for($i = 1; $i < $this->faker->numberBetween(7, 50); $i++){
                 $products = (new Products())
                     ->setName($this->faker->words(2, true))
                     ->setCategory($category)
