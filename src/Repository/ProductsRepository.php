@@ -21,6 +21,22 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
+
+
+    public function findAllWithSearchQuery($category){
+        //dd($category);
+            $qb = $this->createQueryBuilder('c');
+            $rrr = $qb->orderBy('c.createdAt', 'DESC');
+            $ddd = $this->findBy($category);
+            //dd($rrr);
+
+            return $ddd;
+    }
+
+
+
+
+
     public function save(Products $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

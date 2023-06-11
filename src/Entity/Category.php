@@ -43,13 +43,11 @@ class Category
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: self::class)]
-    private Collection $categories;
+//    #[ORM\OneToMany(mappedBy: 'category', targetEntity: self::class)]
+//    private Collection $categories;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'php')]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'products')]
     private ?self $category = null;
-
-
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Products::class)]
     private Collection $products;
