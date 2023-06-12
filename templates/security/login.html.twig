@@ -3,44 +3,38 @@
 {% block title %}Log in!{% endblock %}
 
 {% block content %}
-<div class="Section">
-    <div class="wrap">
-        <div class="Section">
-        <p class="wrap">
-<form method="post">
-    {% if error %}
-    <p style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</form></p>
-    {% endif %}
-
-    {% if app.user %}
-        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-    {% endif %}
-
-
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-    #}
-
-                <input type="checkbox" name="_remember_me"> Remember me
 
 
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+
+    <div class="Section">
+        <div class="wrap">
+            <form class="form Authorization" action="#" method="post">
+                {% if error %}
+                    <p style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                {% endif %}
+                {% if app.user %}
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                {% endif %}
+                <div class="row">
+                    <div class="row-block">
+                        <div class="form-group">
+                            <label class="form-label" for="email">E-mail</label>
+                            <input class="form-input" id="email" name="email" type="text" value="{{ last_username }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="password">Пароль</label>
+                            <input class="form-input" id="password" name="password" type="password" placeholder="Ваш пароль">
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="form-group">
+                            <button class="btn btn_primary" type="submit">Войти</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-</div>
-</div>
+
+
 {% endblock %}
