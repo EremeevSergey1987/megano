@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'category' => ['name' => 'О нас'],
+            'category' => ['name' => 'Вход'],
             'categorys' => $this->getCategory($repository),
 
             'error' => $error]);
