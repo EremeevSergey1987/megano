@@ -21,6 +21,8 @@ use App\Entity\User;
 class LoginFormAuthenticator extends AbstractAuthenticator
 {
 
+
+
     private UserRepository $userRepository;
     private CsrfTokenManagerInterface $csrfToken;
 
