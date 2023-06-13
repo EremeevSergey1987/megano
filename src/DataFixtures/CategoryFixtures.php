@@ -13,13 +13,17 @@ class CategoryFixtures extends BaseFixtures
         $this->faker = Factory::create();
         $this->createMany(Category::class, 10, function (Category $category) use ($manager)
         {
+
             $category
                 ->setName($this->faker->words(2, true))
                 ->setText($this->faker->words(2, true));
-            if ($this->faker->boolean(60)) {
-                $category->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))))
-                    ->setCategory($category);
+            if ($this->faker->boolean(90)) {
+                $category->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(0, 50))));
             }
+            if ($this->faker->boolean(30)) {
+                $category->setCategory($category);
+            }
+
 
             for($i = 1; $i < $this->faker->numberBetween(7, 50); $i++){
                 $products = (new Products())

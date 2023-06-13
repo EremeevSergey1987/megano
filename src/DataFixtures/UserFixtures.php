@@ -15,7 +15,13 @@ class UserFixtures extends BaseFixtures
                 ->setEmail($this->faker->email())
                 ->setFirstName($this->faker->firstName)
                 ->setPassword('123456');
-
         });
+        $this->createMany(User::class, 1, function (User $user){
+            $user
+                ->setEmail('eremeev87@bk.ru')
+                ->setFirstName('Администратор')
+                ->setPassword('123456');
+        });
+
     }
 }
