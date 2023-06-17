@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
-class SecurityController extends AbstractController
+class SecurityController extends pagesController
 {
 
     private EntityManagerInterface $entityManager;
@@ -25,11 +25,6 @@ class SecurityController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    public function getCategory(CategoryRepository $repository)
-    {
-        $categorys = $repository->findLatestPublished();
-        return $categorys;
-    }
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, CategoryRepository $repository): Response
     {
@@ -42,12 +37,10 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'category' => ['name' => 'Вход'],
-            'categorys' => $this->getCategory($repository),
-
+            'categories' => $this->getCategory($repository),
             'error' => $error]);
     }
 
@@ -76,7 +69,7 @@ class SecurityController extends AbstractController
         }
         return $this->render('pages/register.html.twig', [
             'category' => ['name' => 'Регистрация'],
-            'categorys' => $this->getCategory($repository),
+            'categories' => $this->getCategory($repository),
         ]);
     }
 

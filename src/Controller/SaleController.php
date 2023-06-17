@@ -53,7 +53,7 @@ class SaleController extends pagesController
             'controller_name' => 'SaleController',
             'sale_item' => $sale_item,
             'category' => ['name' => 'Скидки'],
-            'categorys' => $this->getCategory($repository),
+            'categories' => $this->getCategory($repository),
         ]);
     }
 }

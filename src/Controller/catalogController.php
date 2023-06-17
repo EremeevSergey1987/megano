@@ -21,9 +21,7 @@ class catalogController extends pagesController
                          PaginatorInterface $paginator
     )
     {
-
         $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);
-
         $pagination = $paginator->paginate(
             $productsRepository->findAllWithSearchQuery(['category' => $category]), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -34,7 +32,7 @@ class catalogController extends pagesController
 
         return $this->render('/category/show.html.twig', [
             'category' => $category,
-            'categorys' => $this->getCategory($repository),
+            'categories' => $this->getCategory($repository),
             'products' => $pagination,
         ]);
     }

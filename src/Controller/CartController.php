@@ -7,13 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CartController extends AbstractController
+class CartController extends pagesController
 {
-    public function getCategory(CategoryRepository $repository)
-    {
-        $categorys = $repository->findLatestPublished();
-        return $categorys;
-    }
     public $items = [
         [
             'category' => 'Category name',
@@ -50,7 +45,7 @@ class CartController extends AbstractController
         return $this->render('cart/index.html.twig', [
             'items' => $this->items,
             'category' => ['name' => 'Корзина'],
-            'categorys' => $this->getCategory($repository),
+            'categories' => parent::getCategory($repository),
         ]);
     }
 }

@@ -24,11 +24,9 @@ class ProductsController extends pagesController
     {
         $product = $em->getRepository(Products::class)->findOneBy(['slug' => $item]);
 
-
-
         return $this->render('products/index.html.twig', [
             'category' => $product,
-            'categorys' => $this->getCategory($repository),
+            'categories' => $this->getCategory($repository),
         ]);
     }
 }

@@ -76,9 +76,11 @@ p.error-browser
                         <div class="row-block">
                             {% if app.user %}
                                 <p>Вы авторизованы как {{ app.user.userIdentifier }} <a href="{{ path('app_logout') }}">Выйти</a></p>
+                                <a class="ControlPanel-title" href="{{ path('app_personal') }}">Кабинет</a>
                             {% else %}
                                 <a class="ControlPanel-title" href="{{ path('app_login') }}">Войти</a>&nbsp;/&nbsp;
-                                <a class="ControlPanel-title" href="/register/">Регистрация</a>
+                                <a class="ControlPanel-title" href="{{ path('app_personal') }}">Кабинет</a> /
+                                <a class="ControlPanel-title" href="{{ path('app_register') }}">Регистрация</a>
                             {% endif %}
                         </div>
                     </div>
@@ -126,7 +128,7 @@ p.error-browser
                     </div>
                     <div class="CategoriesButton-content">
 
-{% for category in categorys %}
+{% for category in categories %}
 {% if (category.category) %}
     <div class="CategoriesButton-link"><a href="#">
             <div class="CategoriesButton-icon">
